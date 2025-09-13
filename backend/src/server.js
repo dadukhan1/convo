@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 1000;
 app.use("/api/auth", authRoutes);
 app.use("/api/message", messageRoutes);
 
-if (process.env.NODE_ENV === "productioin") {
+if (process.env.NODE_ENV === "production") {
     app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
     app.get("*", (_, res) => {
