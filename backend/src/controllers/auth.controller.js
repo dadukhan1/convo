@@ -17,7 +17,7 @@ export const signup = async (req, res) => {
         if (!emailRegex.test(email)) return res.status(400).json({ message: "Invalid email format" });
 
         const user = await User.findOne({ email });
-        
+
         if (user)
             return res.status(400).json({ message: "Email already exists" });
 
@@ -31,8 +31,8 @@ export const signup = async (req, res) => {
         });
 
         if (newUser) {
-            generateToken(newUser._id, res); 
             await newUser.save();
+            generateToken(newUser._id, res);
 
             res.status(201).json({
                 _id: newUser._id,

@@ -13,7 +13,7 @@ const __dirname = path.resolve();
 
 const PORT = process.env.PORT || 1000;
 
-app.use(express.json());    
+app.use(express.json());
 
 app.use("/api/auth", authRoutes);
 app.use("/api/message", messageRoutes);
@@ -26,7 +26,11 @@ if (process.env.NODE_ENV === "production") {
     });
 }
 
-app.listen(PORT, () => {
-    console.log(`App is runing on the ${PORT}`)
-    connectDB();
-});
+connectDB().then(() => {
+    app.listen(PORT, () => {
+        console.log(`App is running on the port : ${PORT}`);
+    })
+}).catch((err) => {
+    console.log("MongoDB connection Error", err);
+    process.exit(1);
+})
