@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/dadukhan1/convo/issues"
   },
-  "homepage": "https://github.com/dadukhan1/convo#readme"
+  "homepage": "https://github.com/dadukhan1/convo#readme",
+  "dependencies": {
+    "resend": "^6.0.2"
+  }
 }
