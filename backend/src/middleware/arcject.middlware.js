@@ -1,7 +1,7 @@
 import aj from "../lib/arcjet.js";
 import { isSpoofedBot } from "@arcjet/inspect";
 
-export const arcjetFunction = async (req, res, next) => {
+export const arcjetProtection = async (req, res, next) => {
     try {
         const decision = await aj.protect(req);
 
@@ -11,10 +11,9 @@ export const arcjetFunction = async (req, res, next) => {
             }
 
             else if (decision.reason.isBot()) {
-                return res.json(403).json({ message: "Bot Access Denied." });
+                return res.status(403).json({ message: "Bot Access Denied." });
             } else {
-                return res.json(403).json({ message: "Access Denied by security policy." });
-
+                return res.status(403).json({ message: "Access Denied by security policy." });
             }
         }
 
@@ -25,6 +24,7 @@ export const arcjetFunction = async (req, res, next) => {
             });
         }
 
+        next();
 
     } catch (error) {
         console.log("Arcject Protection Error: ", error);
